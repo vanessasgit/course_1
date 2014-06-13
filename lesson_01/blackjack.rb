@@ -13,7 +13,7 @@
 
 play = "y"
 
-while play =="y"
+while play == "y"
 
   def calculate(arr)
     total = 0
@@ -41,7 +41,9 @@ while play =="y"
   puts "Welcome! Let's play some blackjack!"
   puts "What is your name?"
   name = gets.chomp
+  puts ""
   puts "Let's get started #{name}!"
+  puts ""
 
   suit = ["of clubs", "of diamonds", "of hearts", "of spades"]
   card = [ "Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
@@ -72,7 +74,8 @@ while play =="y"
   end
 
   puts "1) Hit or 2) Stay"
-  choice = gets.chomp
+      choice = gets.chomp
+      puts ""
 
   while !['1', '2'].include?(choice)
   puts "Please try again. You must enter 1 or 2."
@@ -85,30 +88,29 @@ while play =="y"
     puts "Here are your cards: #{players_cards}"
     player = calculate(players_cards)
     puts "Total: #{player}"
+    puts ""
     
     if player > 21
-      puts "Bust" 
+      puts "Bust"
+      break
     elsif player == 21
       puts "You won #{name}"
+      break
     else
       puts "1) Hit or 2) Stay"
       choice = gets.chomp
+      puts ""
 
       while !['1', '2'].include?(choice)
         puts "Please try again. You must enter 1 or 2."
         puts "1) Hit or 2) Stay"
         choice = gets.chomp
+        puts ""
       end
     end
   end
-  
-  if choice == "2"
-    if dealer == 21
-      puts "Here are the dealers cards: #{dealers_cards}"
-      dealer = calculate(dealers_cards)
-      puts "Sorry, the dealer hit blackjack"
-    end
 
+  if choice == "2"
     while dealer < 17
       dealers_cards << deck.pop
       puts "Here are the dealers cards: #{dealers_cards}"
@@ -127,8 +129,6 @@ while play =="y"
     if dealer == 21
       puts "Sorry, the dealer hit blackjack"
     elsif dealer > 21 && player < 21
-      puts "Here are the dealer's cards: #{dealers_cards}"
-      puts "Total: #{dealer}"
       puts "Bust!"
       puts "You won #{name}!"
     elsif dealer > player
@@ -138,16 +138,21 @@ while play =="y"
     elsif dealer == player
       puts "Here are the dealer's cards: #{dealers_cards}"
       puts "Total: #{dealer}"
-      puts "Push"
-      puts "It's a tie!" 
+      puts "Push, it's a tie!" 
     else 
-      puts "Here are the dealer's cards: #{dealers_cards}"
-      puts "Total: #{dealer}"
       puts "You won #{name}!"
     end
   end
-   puts "Do you want to play another hand? y/n"
-   play = gets.chomp
+  puts ""
+  puts "Do you want to play another hand? y/n"
+  play = gets.chomp
+  puts ""
+  while !['y', 'n'].include?(play)
+    puts "Please try again. You must enter y or n."
+    puts "Do you want to play another hand? y/n"
+    play = gets.chomp
+    puts ""
+  end
 end
 
 
