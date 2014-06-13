@@ -71,6 +71,7 @@ while play == "y"
 
   if player == 21
     puts "Congrats! You won!"
+    exit
   end
 
   puts "1) Hit or 2) Stay"
