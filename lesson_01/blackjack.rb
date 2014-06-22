@@ -133,7 +133,7 @@ while play == "y"
       puts "Bust!"
       puts "You won #{name}!"
     elsif dealer > player
-      puts puts "Here are the dealer's cards: #{dealers_cards}"
+      puts "Here are the dealer's cards: #{dealers_cards}"
       puts "Total: #{dealer}"
       puts "You Lost :( !"
     elsif dealer == player
