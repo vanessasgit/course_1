@@ -21,7 +21,7 @@ class Deck
         @cards << Card.new(suit, value) # an array of card objects
       end
     end
-  #@cards = @cards * num_decks
+  
   scramble!
   end
 
@@ -107,14 +107,12 @@ class Dealer
   end
 
   def show_flop
-      puts "-------#{name}'s Hand-------"
-      puts "First card is hidden"
-      puts "Second card => #{cards[1]}"
+    puts "-------#{name}'s Hand-------"
+    puts "First card is hidden"
+    puts "Second card => #{cards[1]}"
   end
 
 end
-
-
 
 
 
@@ -162,11 +160,9 @@ class Blackjack
   def player_turn
     puts "It's #{player.name}'s turn"
     blackjack_or_bust?(player)
-
-
     puts "1) Hit or 2) Stay"
-        choice = gets.chomp
-        puts ""
+    choice = gets.chomp
+    puts ""
 
     while !['1', '2'].include?(choice)
     puts "Please try again. You must enter 1 or 2."
@@ -189,63 +185,62 @@ class Blackjack
         puts ""
       end
     end
+  end
 
-    def dealer_turn
-      puts "It's the dealer's turn"
+  def dealer_turn
+    puts "It's the dealer's turn"
+    puts "Dealer's total is: #{dealer.total}"
+    blackjack_or_bust?(dealer)
+
+    while dealer.total < DEALER_HIT_NUMBER
+      dealer.add_card(deck.deal_one)
       puts "Dealer's total is: #{dealer.total}"
-      blackjack_or_bust?(dealer)
-
-      while dealer.total < DEALER_HIT_NUMBER
-        dealer.add_card(deck.deal_one)
-        puts "Dealer's total is: #{dealer.total}"
-      end
-
-      if dealer.total == DEALER_HIT_NUMBER && (dealer.cards[0].value == "Ace" || dealer.cards[0].value == 6) && (dealer.cards[1].value == "Ace" || cards[1].value == 6)
-        dealer.add_card(deck.deal_one)
-        puts "Dealer's total is: #{dealer.total}"
-      end
-
-      blackjack_or_bust?(dealer)
-
     end
 
-    def who_won?
-      if dealer.total > player.total
-          dealer.show_hand
-          puts "You Lost :( !"
-          play_again?
-      elsif dealer.total == player.total
-        dealer.show_hand
-        puts "Push, it's a tie!"
-        play_again? 
-      else 
-        puts "You won #{player.name}!"
-        play_again?
-      end
+    if dealer.total == DEALER_HIT_NUMBER && (dealer.cards[0].value == "Ace" || dealer.cards[0].value == 6) && (dealer.cards[1].value == "Ace" || dealer.cards[1].value == 6)
+      dealer.add_card(deck.deal_one)
+      puts "Dealer's total is: #{dealer.total}"
     end
 
-    def play_again?  
+    blackjack_or_bust?(dealer)
+  end
+
+  def who_won?
+    if dealer.total > player.total
+      dealer.show_hand
+      puts "You Lost :( !"
+      play_again?
+    elsif dealer.total == player.total
+      dealer.show_hand
+      puts "Push, it's a tie!"
+      play_again? 
+    else 
+      puts "You won #{player.name}!"
+      play_again?
+    end
+  end
+
+  def play_again?  
+    puts "Do you want to play another hand? y/n"
+    play = gets.chomp
+    puts ""
+    while !['y', 'n'].include?(play)
+      puts "Please try again. You must enter y or n."
       puts "Do you want to play another hand? y/n"
       play = gets.chomp
       puts ""
-      while !['y', 'n'].include?(play)
-        puts "Please try again. You must enter y or n."
-        puts "Do you want to play another hand? y/n"
-        play = gets.chomp
-        puts ""
-      end
+    end
 
-      if play == 'y'
-        puts "Starting new game..."
-        puts ""
-        deck = Deck.new
-        player.cards = []
-        dealer.cards = []
-        run
-      else
-        puts "Goodbye!"
-        exit
-      end
+    if play == 'y'
+      puts "Starting new game..."
+      puts ""
+      deck = Deck.new
+      player.cards = []
+      dealer.cards = []
+      run
+    else
+      puts "Goodbye!"
+      exit
     end
   end
   
