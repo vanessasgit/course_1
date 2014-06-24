@@ -165,9 +165,9 @@ class Blackjack
     puts ""
 
     while !['1', '2'].include?(choice)
-    puts "Please try again. You must enter 1 or 2."
-    puts "1) Hit or 2) Stay"
-    choice = gets.chomp
+      puts "Please try again. You must enter 1 or 2."
+      puts "1) Hit or 2) Stay"
+      choice = gets.chomp
     end
 
     while !player.is_busted? && choice == "1"
