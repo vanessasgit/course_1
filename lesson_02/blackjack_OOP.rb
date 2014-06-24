@@ -50,14 +50,14 @@ module Hand
  def total
   total = 0
   aces = 0
-  cards.each do |v|
-    if v.value.eql?("Jack") || v.value.eql?("Queen") || v.value.eql?("King")
+  cards.each do |card|
+    if card.value.eql?("Jack") || card.value.eql?("Queen") || card.value.eql?("King")
       total += 10
-    elsif v.value == "Ace"
+    elsif card.value == "Ace"
       total += 11
       aces += 1
     else  
-    total += v.value
+    total += card.value
     end
   end
 
@@ -193,12 +193,15 @@ class Blackjack
     blackjack_or_bust?(dealer)
 
     while dealer.total < DEALER_HIT_NUMBER
-      dealer.add_card(deck.deal_one)
+      new_card = deck.deal_one
+      puts "Dealing card to dealer: #{new_card}"
+      dealer.add_card(new_card)
       puts "Dealer's total is: #{dealer.total}"
     end
 
     if dealer.total == DEALER_HIT_NUMBER && (dealer.cards[0].value == "Ace" || dealer.cards[0].value == 6) && (dealer.cards[1].value == "Ace" || dealer.cards[1].value == 6)
-      dealer.add_card(deck.deal_one)
+      new_card = deck.deal_one
+      dealer.add_card(new_card)
       puts "Dealer's total is: #{dealer.total}"
     end
 
