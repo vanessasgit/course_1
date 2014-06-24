@@ -148,10 +148,10 @@ class Blackjack
   end
 
   def blackjack_or_bust?(player_or_dealer)
-    if player_or_dealer.total == 21
+    if player_or_dealer.total == BLACKJACK_TOTAL
       puts "#{player_or_dealer.name} won! Game over."
       play_again?
-    elsif player_or_dealer.total > 21
+    elsif player_or_dealer.total > BLACKJACK_TOTAL
       puts "#{player_or_dealer.name} busted!"
       play_again?
     end
