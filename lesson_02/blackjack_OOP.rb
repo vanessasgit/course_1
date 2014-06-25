@@ -1,3 +1,4 @@
+require 'pry'
 
 class Card
   attr_accessor :suit, :value
@@ -237,7 +238,7 @@ class Blackjack
     if play == 'y'
       puts "Starting new game..."
       puts ""
-      deck = Deck.new
+      @deck = Deck.new
       player.cards = []
       dealer.cards = []
       run
